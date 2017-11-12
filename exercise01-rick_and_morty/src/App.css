@@ -1,0 +1,57 @@
+.App {
+    text-align: center;
+}
+
+.warper {
+    display: inline-block;
+    position: relative;
+}
+
+.warper .sliderImg {
+    max-height: 400px;
+}
+
+.warper .slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100px;
+    height: 100px;
+}
+
+.case-left {
+    max-width: 100px;
+    max-height: 100px;
+    left: 0;
+}
+
+.case-right {
+    max-width: 100px;
+    max-height: 100px;
+    right: 0;
+}
+
+.focused-img {
+    max-height: 200px;
+}
+
+.char-img {
+    display: inline-block;
+    border: 2px solid orange;
+}
+
+.char-img img {
+    max-height: 200px;
+}
+
+.clicker {
+    width: 50px;
+}
+
+fieldset {
+    max-width: 600px;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    transform: translateX(100%);
+}
