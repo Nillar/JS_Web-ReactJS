@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import reqHandler from './../utils/reqHandler';
 import dataCollector from './../utils/dataCollector';
+import notification from "../utils/notificationHandler";
 
 class SubmitPost extends Component {
     constructor() {
@@ -15,6 +16,7 @@ class SubmitPost extends Component {
         this.createPost = e => {
             e.preventDefault();
             reqHandler.createPost(this.state).then(() =>{
+                notification.showInfo('Post Created');
                 window.location.replace('/catalog');
             })
         }

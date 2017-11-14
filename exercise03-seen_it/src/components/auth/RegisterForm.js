@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import reqHandler from '../utils/reqHandler';
 import dataCollector from './../utils/dataCollector';
+import notification from "../utils/notificationHandler";
 
 class RegisterForm extends Component {
     constructor() {
@@ -19,6 +20,7 @@ class RegisterForm extends Component {
                             localStorage.setItem('token', res._kmd.authtoken);
                             localStorage.setItem('username', res.username);
                             this.setState({loading: false, success: true});
+                            notification.showInfo('Registration Successful.');
                             window.location.replace('/catalog')
                         }).catch((e) =>{
                         console.log(e)
@@ -31,18 +33,18 @@ class RegisterForm extends Component {
         this.validate = (payload) =>{
 
                 let userPattern = /[a-zA-Z]{3,}/g;
-                let passPattern = /[a-zA-Z0-9]{6,}/g;
+                let passPattern = /[a-zA-Z0-9]{3,}/g;
 
                 if (!userPattern.test(payload.username)) {
+                    notification.showError('A username should be at least 3 characters long and should contain only english alphabet letters.');
                     // notify.showError('A username should be at least 3 characters long and should contain only english alphabet letters.');
                     return false;
                 }
 
                 if (!passPattern.test(payload.password)) {
-                    // notify.showError('Password should be at least 6 characters long and should contain only english alphabet letters and digits.');
+                    notification.showError('Password should be at least 3 characters long and should contain only english alphabet letters and digits.');
                     return false;
                 }
-
 
 
                 return true;

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import reqHandler from '../utils/reqHandler';
 import dataCollector from './../utils/dataCollector';
+import notification from "../utils/notificationHandler";
 
 
 class LoginForm extends Component {
@@ -22,10 +23,11 @@ class LoginForm extends Component {
                 .then(res => {
                     localStorage.setItem('token', res._kmd.authtoken);
                     localStorage.setItem('username', res.username);
+                    notification.showInfo('Login Successful.');
                     this.setState({loading: false, success: true});
                     window.location.replace('/catalog')
                 }).catch((e) =>{
-                console.log(e)
+                notification.showError("Invalid Credentials.");
             })
         }
     }

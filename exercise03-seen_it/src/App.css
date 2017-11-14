@@ -197,15 +197,15 @@ header {
     border-radius: 10px;
 }
 
-#loadingBox > span {
+#loadingBox {
     background: #7CB3E9;
 }
 
-#infoBox > span {
+#infoBox {
     background: #393;
 }
 
-#errorBox > span {
+#errorBox {
     background: #F50;
 }
 

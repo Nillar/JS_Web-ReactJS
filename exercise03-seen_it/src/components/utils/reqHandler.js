@@ -2,7 +2,6 @@ const baseUrl = 'https://baas.kinvey.com';
 const appKey = 'kid_ry2IULVyz';
 const appSecret = '59e78525e6fc46a7b71b536f3944dc78';
 
-// const kinveyTokens = {baseUrl, appKey, appSecret};
 let reqHandler = {
     login: payload => {
        return fetch(`${baseUrl}/user/${appKey}/login`, {

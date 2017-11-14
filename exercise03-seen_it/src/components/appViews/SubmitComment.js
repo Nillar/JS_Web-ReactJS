@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import reqHandler from './../utils/reqHandler';
 import PostDetails from './PostDetails'
 import dataCollector from './../utils/dataCollector';
+import notification from "../utils/notificationHandler";
 
 class SubmitComment extends Component{
     constructor(props){
@@ -21,6 +22,7 @@ class SubmitComment extends Component{
             e.preventDefault();
 
             reqHandler.createComment(this.state).then(() =>{
+                notification.showInfo('Comment created');
                 window.location.replace(`/details/${this.state.postId}`);
             })
         }

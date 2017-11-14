@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import reqHandler from './../utils/reqHandler';
+import notification from "../utils/notificationHandler";
 
 class EditPost extends Component {
     constructor(props) {
@@ -30,9 +31,9 @@ class EditPost extends Component {
             imageUrl: this.state.image
         };
         let postId = this.props.match.params.id;
-        console.log('here ' + postId);
         reqHandler.editPost(payload, postId)
             .then(() => {
+            notification.showInfo('Post edited.')
                window.location.replace(`/details/${postId}`);
             })
     };
