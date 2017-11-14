@@ -1,3 +1,5 @@
+import notification from "./notificationHandler";
+
 const baseUrl = 'https://baas.kinvey.com';
 const appKey = 'kid_ry2IULVyz';
 const appSecret = '59e78525e6fc46a7b71b536f3944dc78';
@@ -68,6 +70,7 @@ let reqHandler = {
                 Authorization: 'Kinvey ' + localStorage.getItem('token')
             }
         }).then(()=>{
+            notification.showInfo('Post Deleted.');
             window.location.reload();
         })
     },
@@ -120,6 +123,7 @@ let reqHandler = {
                 Authorization: 'Kinvey ' + localStorage.getItem('token')
             }
         }).then(()=>{
+            notification.showInfo('Comment Deleted.');
             window.location.reload();
         })
 }
