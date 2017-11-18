@@ -32,7 +32,7 @@ class Register extends Component {
         }
         let data = await register(this.state.username, this.state.password, this.state.subscriptions);
         toastr.success('Register successful!');
-        this.props.history.push('/login');
+        this.props.history.push('/');
 
     }
 
