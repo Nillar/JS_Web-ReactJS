@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import CreateChirp from "./partials/CreateChirp";
 import Chirp from "./partials/Chirp";
-import {getAllChirps, countFollowers, countFollowing, countChirps} from "./utils/reqHandler";
+import {getAllChirps} from "./utils/reqHandler";
 
 class MainFeed extends Component {
     constructor(props) {
@@ -9,31 +9,15 @@ class MainFeed extends Component {
 
         this.state = {
             chirps: []
-            // chirpCount: 0,
-            // followingCount: 0,
-            // followersCount: 0
         };
 
 
         this.getData = this.getData.bind(this);
     }
 
-    // async getStats() {
-    //     const chirps = await countChirps();
-    //     const following = await countFollowing();
-    //     const followers = await countFollowers();
-    //
-    //     this.setState({
-    //         chirpCount: chirps.length,
-    //         followingCount: following.length,
-    //         followersCount: followers.length
-    //     });
-    // }
-
 
     componentDidMount() {
         this.getData();
-        // this.getStats()
     }
 
     async getData() {

@@ -171,7 +171,6 @@ async function countUserFollowers(username) {
 }
 
 async function followUser(username){
-    const currentUser = localStorage.getItem('username');
     const userId = localStorage.getItem('userId');
     const subscriptions = localStorage.getItem('subscriptions');
     let subsArray = [];
@@ -196,7 +195,6 @@ async function followUser(username){
 async function unfollowUser(username) {
     console.log('unfollowing');
     console.log(username);
-    const currentUser = localStorage.getItem('username');
     const userId = localStorage.getItem('userId');
     const subscriptions = localStorage.getItem('subscriptions');
     let subsArray = [];

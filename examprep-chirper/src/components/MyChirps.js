@@ -22,10 +22,10 @@ class MyChirps extends Component {
         let res = await listMyChirps();
         this.setState({myChirps:res});
     }
-    componentDidCatch(){
-        console.log('error');
-        this.props.history.push('/');
-    }
+    // componentDidCatch(){
+    //     console.log('error');
+    //     this.props.history.push('/');
+    // }
 
     render() {
         return (

@@ -22,7 +22,6 @@ class UserView extends Component {
 
         this.getData = this.getData.bind(this);
 
-        // this.onClickHandler = this.onClickHandler.bind(this);
     }
 
     async getData() {
@@ -57,9 +56,6 @@ class UserView extends Component {
 
     async onClickHandler(e, action) {
         e.preventDefault();
-
-        // console.log(localStorage.getItem('subscriptions').split(',').indexOf(this.state.user.username));
-        // const res = await followUser(this.state.user.username);
         if(action === 'follow'){
             const data = await followUser(this.state.user.username);
             this.props.history.push(`/user/${this.props.match.params.id}`);
@@ -67,10 +63,6 @@ class UserView extends Component {
         }
         const res = await unfollowUser(this.state.user.username);
         this.props.history.push(`/user/${this.props.match.params.id}`);
-        // window.location.reload();
-
-        // console.log(data);
-
     }
 
     componentDidMount() {

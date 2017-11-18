@@ -41,7 +41,6 @@ class DiscoverPeople extends Component{
                     </div>
                 </div>
             </section>
-
         )
     }
 }
