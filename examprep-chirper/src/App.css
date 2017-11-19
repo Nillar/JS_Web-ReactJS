@@ -226,3 +226,7 @@ header > *, footer > * {
 #errorBox > span {
     background: #F50;
 }
+
+.col-md-3 div {
+    display: inline-block;
+}

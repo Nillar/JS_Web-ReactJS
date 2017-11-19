@@ -1,55 +1,25 @@
-const express = require('express')
-const fs = require('fs')
-const cors = require('cors')
-const port = 9999
-let app = express()
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const localSignupStrategy = require('./passport/local-signup');
+const localLoginStrategy = require('./passport/local-login');
 
-let bioCollection = fs.readFileSync('./db/bioDb.json')
-let epCollection = fs.readFileSync('./db/epDb.json')
+const app = express();
 
-epCollection = JSON.parse(epCollection.toString())
-bioCollection = JSON.parse(bioCollection.toString())
+const port = 5000;
 
-app.use(cors())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(cors());
 
-app.get('/roster',(req,res)=>{
-    res.send(bioCollection)
-})
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
 
-app.get('/character/:id',(req,res)=>{
-    let targetElem = req.params.id
-    let target = bioCollection.find(x=>{
-        if(x.id==targetElem){
-            return x
-        }
-    })
-    res.send(JSON.stringify(target))     
-})
+// routes
+require('./routes')(app);
 
-//Colection episodes
-
-app.get('/episodePreview/:id',(req,res)=>{
-    let targetElem = req.params.id
-    
-    if(Number(targetElem)<0){
-        console.log(targetElem)
-        targetElem=0
-    }
-    if(Number(targetElem)>=epCollection.length){
-        console.log(targetElem)
-        
-        targetElem=epCollection.length-1
-    }
-    let target = epCollection.find(x=>{
-        if(x.id==targetElem){
-            return x
-        }
-    })
-
-    
-
-    res.send(JSON.stringify(target))
-})
-
-app.listen(port)
-console.log(port)
+app.listen(port, () => {
+    console.log(`Server running on port ${port}...`);
+});

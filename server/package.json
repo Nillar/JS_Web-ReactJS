@@ -1,18 +1,19 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "Simple server responding with som JSON",
+  "name": "exam-server",
+  "version": "0.0.1",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "keywords": [
-    "Server"
-  ],
-  "author": "HH",
+  "author": "Ivaylo Kenov",
   "license": "MIT",
   "dependencies": {
-    "cors": "^2.8.4",
-    "express": "^4.16.2"
+    "body-parser": "1.17.2",
+    "cors": "2.8.3",
+    "express": "4.15.3",
+    "jsonwebtoken": "7.4.1",
+    "passport": "0.3.2",
+    "passport-local": "1.0.0",
+    "validator": "7.2.0"
   }
 }
