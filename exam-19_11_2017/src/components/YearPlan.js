@@ -27,9 +27,7 @@ class YearPlan extends Component {
         }
 
         this.setState({months: arrResult});
-        toastr.success('Yearly Balance loaded');
-        // console.log([...this.state.months].length);
-
+        // toastr.success('Yearly Balance loaded');
 
     }
 

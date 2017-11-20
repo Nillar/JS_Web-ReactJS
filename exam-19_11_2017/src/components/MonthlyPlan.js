@@ -28,10 +28,7 @@ class MonthlyPlan extends Component {
     async onSubmitHandler(e) {
         e.preventDefault();
 
-        console.log('budget ' + this.state.budget);
-        console.log('income ' + this.state.income);
-
-        const res = await addBudget(this.state.income, this.state.budget, this.props.match.params.id, this.props.match.params.month );
+        const res = await addBudget(this.state.income, this.state.budget, this.props.match.params.id, this.props.match.params.month);
         this.getData();
         // window.location.reload();
         toastr.success('Budget and Income updated');
@@ -69,25 +66,26 @@ class MonthlyPlan extends Component {
     async getData() {
         const res = await getMonthlyBalance((this.props.match.params.id + '/' + this.props.match.params.month).toString());
 
-        // console.log(res);
         this.setState({month: res});
-        let expensesArray = [];
-
-        [...this.state.month].map(e => {
-            expensesArray.push(e.expenses);
-        });
         this.setState({
             budget: this.state.month.budget,
             income: this.state.month.income
         });
-        this.setState({expenses: expensesArray});
-
-        console.log(this.state.expenses);
+        this.setState({expenses: res.expenses});
+        // toastr.success('Yearly Balance loaded');
 
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.getData();
+    }
+
+    async componentWillReceiveProps(newProps){
+        console.log(newProps.match.params.month);
+        console.log(this.props.match.params.month);
+        if(newProps.match.params.month !== this.props.match.params.month ){
+           window.location.reload();
+        }
     }
 
 
@@ -129,7 +127,9 @@ class MonthlyPlan extends Component {
                                             <div className="col-md-8 space-top">
                                                 <div className="row">
                                                     <h4 className="col-md-9">Expenses</h4>
-                                                    <Link to={'/plan/' + this.props.match.params.id + '/' + this.props.match.params.month + '/expense'} className="btn btn-secondary ml-2 mb-2">Add
+                                                    <Link
+                                                        to={'/plan/' + this.props.match.params.id + '/' + this.props.match.params.month + '/expense'}
+                                                        className="btn btn-secondary ml-2 mb-2">Add
                                                         expenses</Link>
                                                 </div>
                                                 <table className="table">
@@ -143,8 +143,16 @@ class MonthlyPlan extends Component {
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    {this.state.expenses.length === 0 ? <tr><td>No expenses this month</td></tr> :
-                                                    <Expenses props={this.state.expenses}/>}
+                                                    {this.state.expenses.length === 0 ?
+                                                        <tr>
+                                                            <td>No expenses this month</td>
+                                                        </tr>
+                                                        :
+                                                        this.state.expenses.map(e => {
+                                                            return <Expenses key={e.id} props={e}/>
+                                                        })
+                                                    }
+
 
                                                     </tbody>
                                                 </table>

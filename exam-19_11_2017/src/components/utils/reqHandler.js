@@ -51,8 +51,6 @@ async function getMonthlyBalance(uri) {
 }
 
 async function addBudget(income, budget, year, month) {
-    console.log(budget);
-    console.log(income);
     const res = await fetch(`${baseUrl}/plan/${year}/${month}`, {
         method: 'POST',
         headers: {
@@ -67,25 +65,33 @@ async function addBudget(income, budget, year, month) {
     return await res.json();
 }
 
-async function addExpense(name, category, cost, date, uri) {
-    const payload = {
-        amount: Number(cost),
-        category: category,
-        date: Number(date),
-        name: name
-    };
-
-    console.log(payload);
-    console.log(`${baseUrl}/plan/${uri}/expense`);
-
-    const res = await fetch(`${baseUrl}/plan/${uri}/expense`,{
+async function addExpense(name, category, cost, date, year, month) {
+        const res = await fetch(`${baseUrl}/plan/${year}/${month}/expense`,{
         method: 'POST',
         headers:{
             Authorization: 'bearer ' + localStorage.getItem('token'),
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({payload})
+        body: JSON.stringify({
+            date: Number(date),
+            name: name,
+            category: category,
+            amount: Number(cost)
+        })
+
     });
     return await res.json();
 }
-export {login, register, getYearBalance, getMonthlyBalance, addBudget, addExpense}
+
+async function deleteExpense(id) {
+    const res = await fetch(`${baseUrl}/plan/expense/${id}`,{
+        method: 'DELETE',
+        headers: {
+            Authorization: 'bearer ' + localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+        }
+    });
+
+
+}
+export {login, register, getYearBalance, getMonthlyBalance, addBudget, addExpense, deleteExpense}

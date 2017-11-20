@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {addExpense} from "./utils/reqHandler";
+import toastr from 'toastr';
 
 class AddExpense extends Component{
     constructor(props){
@@ -9,7 +10,7 @@ class AddExpense extends Component{
         this.state = {
             paymentDate: '',
             name: '',
-            category: '',
+            category: 'Fixed',
             cost: ''
         };
 
@@ -19,21 +20,23 @@ class AddExpense extends Component{
     }
 
     componentDidMount(){
-        console.log('Add expense mounted');
+
     }
     onChangeHandler(e){
         this.setState({[e.target.name]:e.target.value});
-        console.log(this.state)
     }
 
     async onSubmitHandler(e){
         e.preventDefault();
+        const res = await addExpense(this.state.name, this.state.category, this.state.cost, this.state.paymentDate, Number(this.props.match.params.id), Number(this.props.match.params.month));
 
-        // name, category, cost, date, uri
+        if(!res.success){
+            toastr.error('Invalid input');
+            return;
+        }
 
-        const res = await addExpense(this.state.name, this.state.category, this.state.cost, this.state.paymentDate, (this.props.match.params.id + '/' + this.props.match.params.month).toString());
-
-        console.log(res);
+        toastr.success('Successfully added expense');
+        this.props.history.push(`/plan/${this.props.match.params.id}/${this.props.match.params.month}`);
     }
 
     render(){

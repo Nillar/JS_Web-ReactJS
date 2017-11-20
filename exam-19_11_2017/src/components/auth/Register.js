@@ -36,10 +36,8 @@ class Register extends Component{
             return;
         }
 
-
         const res = await register(this.state.name, this.state.email, this.state.password);
 
-        console.log(res);
         if(!res.success){
             toastr.error('Invalid Credentials');
             return;

@@ -5,11 +5,11 @@ export default class PrivateRoute extends Component {
     render() {
         if (localStorage.getItem('token') === null) {
             return <Redirect to="/" />;
-        };
+        }
 
         return (
             <Route {...this.props}>
-                this.props.children
+
             </Route>
         );
     }

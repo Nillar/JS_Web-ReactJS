@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
+import toastr from 'toastr';
 
 import {countChirps, countFollowers, countFollowing, createChirp} from "../utils/reqHandler";
 
@@ -44,7 +45,7 @@ class CreateChirp extends Component {
         e.preventDefault();
 
         if (this.state.text === '') {
-            console.log('text cannot be empty');
+            toastr.error('text cannot be empty');
             return;
         }
         let res = await createChirp(this.state.text);

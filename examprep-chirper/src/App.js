@@ -44,6 +44,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+
                 <Header/>
                 <Navigation style={{'display':'none'}} onLogout={this.onLogout}/>}
                 <Switch>

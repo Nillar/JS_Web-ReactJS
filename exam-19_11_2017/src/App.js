@@ -38,6 +38,7 @@ class App extends Component {
     render() {
         return (
            <div className="App">
+
                 <Header loggedIn={this.loggedIn} onLogout={this.onLogout}/>
                 <Switch>
                     <Route exact path="/" component={Login}/>
@@ -45,8 +46,10 @@ class App extends Component {
                     <PrivateRoute path="/plan/:id/:month/expense" component={AddExpense}/>
                     <PrivateRoute path="/plan/:id/:month" component={MonthlyPlan}/>
                     <PrivateRoute path="/plan/:id" component={YearPlan}/>
+                    <PrivateRoute path="/plan/expense/:id"/>
                 </Switch>
                <Footer />
+
             </div>
         );
     }

@@ -17,10 +17,7 @@ class Header extends Component {
         let year = date.getYear();
         let month = date.getMonth();
         const uri = `20${year - 100}/${month + 1}`;
-        console.log(typeof(uri));
         return uri;
-
-
     }
 
 

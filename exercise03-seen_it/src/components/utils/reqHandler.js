@@ -6,7 +6,7 @@ const appSecret = '59e78525e6fc46a7b71b536f3944dc78';
 
 let reqHandler = {
     login: payload => {
-       return fetch(`${baseUrl}/user/${appKey}/login`, {
+        return fetch(`${baseUrl}/user/${appKey}/login`, {
             method: 'POST',
             headers: {
                 Authorization: 'Basic ' + btoa(`${appKey}:${appSecret}`),
@@ -126,7 +126,7 @@ let reqHandler = {
             notification.showInfo('Comment Deleted.');
             window.location.reload();
         })
-}
+    }
 };
 
 export default reqHandler;
