@@ -11,8 +11,8 @@ class MonthlyPlan extends Component {
         this.state = {
             month: '',
             expenses: [],
-            budget: 0,
-            income: 0
+            budget: '',
+            income: ''
         };
 
         this.getData = this.getData.bind(this);
@@ -28,11 +28,13 @@ class MonthlyPlan extends Component {
     async onSubmitHandler(e) {
         e.preventDefault();
 
+        console.log('budget ' + this.state.budget);
+        console.log('income ' + this.state.income);
+
         const res = await addBudget(this.state.income, this.state.budget, this.props.match.params.id, this.props.match.params.month );
-
+        this.getData();
+        // window.location.reload();
         toastr.success('Budget and Income updated');
-        window.location.reload();
-
     }
 
     getMonth(id) {
@@ -67,6 +69,7 @@ class MonthlyPlan extends Component {
     async getData() {
         const res = await getMonthlyBalance((this.props.match.params.id + '/' + this.props.match.params.month).toString());
 
+        // console.log(res);
         this.setState({month: res});
         let expensesArray = [];
 
@@ -79,6 +82,7 @@ class MonthlyPlan extends Component {
         });
         this.setState({expenses: expensesArray});
 
+        console.log(this.state.expenses);
 
     }
 
@@ -125,8 +129,8 @@ class MonthlyPlan extends Component {
                                             <div className="col-md-8 space-top">
                                                 <div className="row">
                                                     <h4 className="col-md-9">Expenses</h4>
-                                                    <a href="expenses.html" className="btn btn-secondary ml-2 mb-2">Add
-                                                        expenses</a>
+                                                    <Link to={'/plan/' + this.props.match.params.id + '/' + this.props.match.params.month + '/expense'} className="btn btn-secondary ml-2 mb-2">Add
+                                                        expenses</Link>
                                                 </div>
                                                 <table className="table">
                                                     <thead>
@@ -139,7 +143,9 @@ class MonthlyPlan extends Component {
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <Expenses/>
+                                                    {this.state.expenses.length === 0 ? <tr><td>No expenses this month</td></tr> :
+                                                    <Expenses props={this.state.expenses}/>}
+
                                                     </tbody>
                                                 </table>
                                             </div>

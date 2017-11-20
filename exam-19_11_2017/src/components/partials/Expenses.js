@@ -4,8 +4,6 @@ import {withRouter, Link} from 'react-router-dom';
 class Expenses extends Component{
     constructor(props){
         super(props);
-
-
     }
 
     componentDidMount(){

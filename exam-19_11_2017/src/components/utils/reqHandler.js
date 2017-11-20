@@ -1,7 +1,6 @@
 const baseUrl = 'http://localhost:5000';
 
 async function register(name, email, password) {
-    console.log(`${baseUrl}/auth/signup`);
     const res = await fetch(`${baseUrl}/auth/signup`, {
         method: 'POST',
         headers: {
@@ -52,19 +51,41 @@ async function getMonthlyBalance(uri) {
 }
 
 async function addBudget(income, budget, year, month) {
+    console.log(budget);
+    console.log(income);
     const res = await fetch(`${baseUrl}/plan/${year}/${month}`, {
         method: 'POST',
         headers: {
-
             Authorization: 'bearer ' + localStorage.getItem('token'),
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            income:income,
-            budget:budget
+            income: Number(income),
+            budget: Number(budget)
         })
     });
     return await res.json();
 }
 
-export {login, register, getYearBalance, getMonthlyBalance, addBudget}
+async function addExpense(name, category, cost, date, uri) {
+    const payload = {
+        amount: Number(cost),
+        category: category,
+        date: Number(date),
+        name: name
+    };
+
+    console.log(payload);
+    console.log(`${baseUrl}/plan/${uri}/expense`);
+
+    const res = await fetch(`${baseUrl}/plan/${uri}/expense`,{
+        method: 'POST',
+        headers:{
+            Authorization: 'bearer ' + localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({payload})
+    });
+    return await res.json();
+}
+export {login, register, getYearBalance, getMonthlyBalance, addBudget, addExpense}

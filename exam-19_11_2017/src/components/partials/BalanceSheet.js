@@ -37,11 +37,6 @@ class BalanceSheet extends Component {
         }
     }
 
-    componentDidMount() {
-        console.log(typeof(`/plan/${this.props.match.params.id}/${(this.props.id).toString()}`))
-    }
-
-
     render() {
         return (
             <div className="col-md-3">

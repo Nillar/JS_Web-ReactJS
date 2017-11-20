@@ -9,6 +9,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import YearPlan from "./components/YearPlan";
 import MonthlyPlan from "./components/MonthlyPlan";
+import AddExpense from "./components/AddExpense";
 
 class App extends Component {
     constructor(props) {
@@ -41,8 +42,9 @@ class App extends Component {
                 <Switch>
                     <Route exact path="/" component={Login}/>
                     <Route path="/register" component={Register}/>
-                    <Route path="/plan/:id/:month" component={MonthlyPlan}/>
-                    <Route path="/plan/:id" component={YearPlan}/>
+                    <PrivateRoute path="/plan/:id/:month/expense" component={AddExpense}/>
+                    <PrivateRoute path="/plan/:id/:month" component={MonthlyPlan}/>
+                    <PrivateRoute path="/plan/:id" component={YearPlan}/>
                 </Switch>
                <Footer />
             </div>
