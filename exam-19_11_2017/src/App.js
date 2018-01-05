@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Switch, Route, withRouter} from 'react-router-dom'
+import './index.css';
+import './bootstrap.min.css';
 import './App.css';
 import PrivateRoute from './components/common/PrivateRoute';
 

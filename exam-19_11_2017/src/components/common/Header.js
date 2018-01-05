@@ -19,6 +19,11 @@ class Header extends Component {
         const uri = `20${year - 100}/${month + 1}`;
         return uri;
     }
+    getYear(){
+        let date = new Date();
+        let year = date.getFullYear();
+        return year;
+    }
 
 
     render() {
@@ -31,7 +36,7 @@ class Header extends Component {
                                 {this.props.loggedIn() &&
                                 <Link className="nav-link" to={`/plan/${this.getDate()}`}>Monthly Balance</Link>}
                                 {this.props.loggedIn() &&
-                                <Link className="nav-link" to="/plan/2017">Yearly Balance</Link>}
+                                <Link className="nav-link" to={`/plan/${this.getYear()}`}>Yearly Balance</Link>}
                                 {this.props.loggedIn() &&
                                 <a href="javascript:void(0)" onClick={this.props.onLogout}>Logout</a>}
 
