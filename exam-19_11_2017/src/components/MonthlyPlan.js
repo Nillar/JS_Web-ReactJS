@@ -81,8 +81,6 @@ class MonthlyPlan extends Component {
     }
 
     async componentWillReceiveProps(newProps){
-        console.log(newProps.match.params.month);
-        console.log(this.props.match.params.month);
         if(newProps.match.params.month !== this.props.match.params.month ){
            window.location.reload();
         }
