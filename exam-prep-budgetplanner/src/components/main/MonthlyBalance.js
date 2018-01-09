@@ -103,12 +103,10 @@ class MonthlyBalance extends Component {
                             <div className="card bg-secondary">
                                 <div className="card-body">
                                     <blockquote className="card-blockquote">
-                                        <h2 id="month">November 2017</h2>
+                                        <h2 id="month" style={{'textTransform': 'capitalize'}}>{this.props.match.params.month} {this.year}</h2>
                                         <div className="row">
                                             <div className="col-md-3 space-top">
                                                 <h4>Planner</h4>
-
-
                                                 <form onSubmit={this.onSubmitHandler}>
                                                     <div className="form-group">
                                                         <label className="form-control-label"

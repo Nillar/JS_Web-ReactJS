@@ -32,7 +32,6 @@ class YearlyBalance extends Component {
         }
         toastr.success(`Successful Loading of ${this.props.match.params.year}`);
         this.setState({months: monthsArray});
-        console.log(this.state.months);
     }
 
 

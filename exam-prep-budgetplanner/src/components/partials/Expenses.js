@@ -26,14 +26,12 @@ class Expenses extends Component {
 
     async deleteExpense(id) {
         const res = await deleteExistingExpense(id);
-        if(res.success === false){
+        if (res.success === false) {
             toastr.error('Expense not found');
             return;
         }
         toastr.info('Expense Deleted');
         this.props.history.push(`/plan/${this.state.year}/${this.props.match.params.month}`);
-        console.log(res);
-
     }
 
     render() {
@@ -44,8 +42,10 @@ class Expenses extends Component {
                 <td>{this.state.amount.toFixed(2)}</td>
                 <td>{this.state.date}-{this.state.month}-{this.state.year}</td>
                 <td>
-                    <Link to={'/'}  onClick={()=>{this.deleteExpense(this.state.id)}}
-                            className="btn btn-secondary">Delete
+                    <Link to={'/'} onClick={() => {
+                        this.deleteExpense(this.state.id)
+                    }}
+                          className="btn btn-secondary">Delete
                     </Link>
                 </td>
             </tr>
